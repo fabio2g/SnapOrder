@@ -1,12 +1,15 @@
 package com.fabio2g.snaporder.config;
 
+import com.fabio2g.snaporder.entities.Order;
 import com.fabio2g.snaporder.entities.User;
+import com.fabio2g.snaporder.repositories.OrderRepository;
 import com.fabio2g.snaporder.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import java.time.Instant;
 import java.util.Arrays;
 
 @Configuration
@@ -15,6 +18,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -29,6 +35,21 @@ public class TestConfig implements CommandLineRunner {
         User user9 = new User(null, "Gabriel Martinez", "gabriel@example.com", "11111111", "112233");
         User user10 = new User(null, "Isabella Lee", "isabella@example.com", "99999999", "12345");
 
-        userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10));
+        Order order1 = new Order(null, Instant.now(), user1);
+        Order order2 = new Order(null, Instant.now(), user2);
+        Order order3 = new Order(null, Instant.now(), user3);
+        Order order4 = new Order(null, Instant.now(), user4);
+        Order order5 = new Order(null, Instant.now(), user5);
+        Order order6 = new Order(null, Instant.now(), user6);
+        Order order7 = new Order(null, Instant.now(), user7);
+        Order order8 = new Order(null, Instant.now(), user8);
+        Order order9 = new Order(null, Instant.now(), user9);
+        Order order10 = new Order(null, Instant.now(), user10);
+
+        userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5,
+                user6, user7, user8, user9, user10));
+
+        orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4, order5,
+                order6, order7, order8, order9, order10));
     }
 }
