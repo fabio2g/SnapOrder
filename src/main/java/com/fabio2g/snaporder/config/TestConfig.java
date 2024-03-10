@@ -2,10 +2,12 @@ package com.fabio2g.snaporder.config;
 
 import com.fabio2g.snaporder.entities.Category;
 import com.fabio2g.snaporder.entities.Order;
+import com.fabio2g.snaporder.entities.Product;
 import com.fabio2g.snaporder.entities.User;
 import com.fabio2g.snaporder.entities.enums.OrderStatus;
 import com.fabio2g.snaporder.repositories.CategoryRepository;
 import com.fabio2g.snaporder.repositories.OrderRepository;
+import com.fabio2g.snaporder.repositories.ProductRepository;
 import com.fabio2g.snaporder.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +30,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public void run(String... args) throws Exception {
         User user1 = new User(null, "John Doe", "john@example.com", "88888888", "12345");
@@ -41,6 +46,9 @@ public class TestConfig implements CommandLineRunner {
         User user9 = new User(null, "Gabriel Martinez", "gabriel@example.com", "11111111", "112233");
         User user10 = new User(null, "Isabella Lee", "isabella@example.com", "99999999", "12345");
 
+        userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5,
+                user6, user7, user8, user9, user10));
+
         Order order1 = new Order(null, Instant.now(), OrderStatus.WAITING_PAYMENT, user1);
         Order order2 = new Order(null, Instant.now(), OrderStatus.CANCELED, user2);
         Order order3 = new Order(null, Instant.now(), OrderStatus.DELIVERED, user3);
@@ -52,16 +60,21 @@ public class TestConfig implements CommandLineRunner {
         Order order9 = new Order(null, Instant.now(), OrderStatus.WAITING_PAYMENT, user9);
         Order order10 = new Order(null, Instant.now(), OrderStatus.PAID, user10);
 
+        orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4, order5,
+                order6, order7, order8, order9, order10));
+
         Category category1 = new Category(null, "Electronic");
         Category category2 = new Category(null, "Books");
         Category category3 = new Category(null, "Computers");
 
-        userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5,
-                user6, user7, user8, user9, user10));
-
-        orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4, order5,
-                order6, order7, order8, order9, order10));
-
         categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
+
+        Product product1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+        Product product2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+        Product product3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+        Product product4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+        Product product5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+
+        productRepository.saveAll(Arrays.asList(product1, product2, product3, product4, product5));
     }
 }
