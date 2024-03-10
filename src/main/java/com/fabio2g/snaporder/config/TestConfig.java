@@ -1,8 +1,10 @@
 package com.fabio2g.snaporder.config;
 
+import com.fabio2g.snaporder.entities.Category;
 import com.fabio2g.snaporder.entities.Order;
 import com.fabio2g.snaporder.entities.User;
 import com.fabio2g.snaporder.entities.enums.OrderStatus;
+import com.fabio2g.snaporder.repositories.CategoryRepository;
 import com.fabio2g.snaporder.repositories.OrderRepository;
 import com.fabio2g.snaporder.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -47,10 +52,16 @@ public class TestConfig implements CommandLineRunner {
         Order order9 = new Order(null, Instant.now(), OrderStatus.WAITING_PAYMENT, user9);
         Order order10 = new Order(null, Instant.now(), OrderStatus.PAID, user10);
 
+        Category category1 = new Category(null, "Electronic");
+        Category category2 = new Category(null, "Books");
+        Category category3 = new Category(null, "Computers");
+
         userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5,
                 user6, user7, user8, user9, user10));
 
         orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4, order5,
                 order6, order7, order8, order9, order10));
+
+        categoryRepository.saveAll(Arrays.asList(category1, category2, category3));
     }
 }
