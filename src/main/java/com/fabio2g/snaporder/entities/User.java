@@ -25,7 +25,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
-    public User(){
+    public User() {
     }
 
     public User(Long id, String name, String email, String phone, String password) {
@@ -82,8 +82,10 @@ public class User implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         User user = (User) o;
         return Objects.equals(id, user.id) && Objects.equals(email, user.email);
     }
